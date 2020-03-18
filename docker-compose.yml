@@ -1,0 +1,55 @@
+version: "3"
+services:
+    nginx:
+        image: nginx:1.15.7-alpine
+        container_name: nginx
+        env_file:
+          - .env
+        ports:
+          - "80:80"
+        volumes:
+          - ${WWWROOT}:/www/:rw
+          - ./etc/nginx:/etc/nginx/
+        environment:
+          TZ: "Asia/Shanghai"
+        restart: always
+        networks:
+          - default
+    
+    php7-fpm:
+        image: holmesian/php7-fpm:v1
+        container_name: php-fpm
+        env_file:
+          - .env
+        volumes:
+          - ${WWWROOT}:/www/:rw
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+        restart: always
+        environment:
+          TZ: "Asia/Shanghai"
+        cap_add:
+          - SYS_PTRACE
+        networks:
+          - default
+        
+
+    mysql:
+        image: mysql:5
+        container_name: mysql
+        ports:
+            - "3306:3306"
+        env_file:
+            - .env
+        volumes:
+            - ${MYSQLDATA}:/var/lib/mysql:rw
+            - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf
+        restart: always
+        networks:
+            - default
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQLPASWD}
+            TZ: "Asia/Shanghai"
+
+networks:
+  default:
