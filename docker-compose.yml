@@ -16,7 +16,7 @@ services:
         networks:
           - default
     
-    php7-fpm:
+    php-fpm:
         image: holmesian/php7-fpm:v2
         container_name: php-fpm
         env_file:
