@@ -16,14 +16,19 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
+        libbz2-dev \
+    && apt-get install -y --no-install-recommends libmagickwand-dev libmcrypt-dev  zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) gd bcmath \
         && docker-php-ext-install zip \
         && docker-php-ext-install pdo_mysql \
         && docker-php-ext-install opcache \
         && docker-php-ext-install mysqli \
-        && pecl install xdebug-2.5.5 \
-        && docker-php-ext-enable  xdebug \
+        && docker-php-ext-install mcrypt \
+        && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+        && pecl install xdebug-2.5.5  imagick-beta\
+        && docker-php-ext-enable xdebug imagick mcrypt \
+        && docker-php-ext-configure opcache --enable-opcache \
         && rm -r /var/lib/apt/lists/*
         
 

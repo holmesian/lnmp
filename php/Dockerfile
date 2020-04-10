@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:7.3.8-fpm
 MAINTAINER holmesian "i@holmesian.org"
 
 #  设置时区
@@ -16,14 +16,18 @@ RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
+        libbz2-dev \
+    && apt-get install -y --no-install-recommends libmagickwand-dev libmcrypt-dev  zlib1g-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) gd bcmath \
         && docker-php-ext-install zip \
         && docker-php-ext-install pdo_mysql \
         && docker-php-ext-install opcache \
         && docker-php-ext-install mysqli \
-        && pecl install xdebug-2.8.1 \
-        && docker-php-ext-enable xdebug \
+        && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+        && pecl install xdebug-2.8.1 imagick-3.4.4 mcrypt-1.0.2 swoole-4.4.3 \
+        && docker-php-ext-enable xdebug imagick mcrypt  swoole\
+        && docker-php-ext-configure opcache --enable-opcache \
         && rm -r /var/lib/apt/lists/*
         
 
