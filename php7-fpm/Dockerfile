@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 #RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && mv sources.list /etc/apt/
 
 #  更新安装依赖包和PHP核心拓展
-RUN apt-get update \
+RUN apt-get update  \
     && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev  zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev\
     && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli\
     && pecl install xdebug-2.8.1 imagick-3.4.4 mcrypt-1.0.2 \
