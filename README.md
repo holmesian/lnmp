@@ -33,7 +33,7 @@ nginx  php-fpm  mysql xdebug docker 开发环境
 
     - 默认为 php7.1 
     
-    - 将 docker-compose.yml 中"image: holmesian/php7-fpm:v1"替换成"image: holmesian/php5-fpm:v1"即可使用PHP5
+    - 将 docker-compose.yml 中"image: holmesian/php7-fpm"替换成"image: holmesian/php5-fpm"即可使用PHP5
     
     - php / php5 目录下的 Dockerfile 为镜像配置文件，可酌情修改。
     
