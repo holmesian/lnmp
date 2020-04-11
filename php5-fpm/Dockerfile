@@ -4,7 +4,8 @@ MAINTAINER holmesian "i@holmesian.org"
 #  设置时区
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list
+    && sed -i "s@http://deb.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list \
+    && sed -i "s@http://security.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list 
 
 # WORKDIR /www
 #COPY . .
