@@ -15,12 +15,19 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 RUN apt-get update  \
     && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev  zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev\
     && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli\
-    && pecl install imagick-3.4.4 mcrypt-1.0.2 \
+    && pecl install imagick mcrypt-1.0.3 \
     && docker-php-ext-enable imagick mcrypt \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure zip \
     && docker-php-ext-configure opcache --enable-opcache \
+    && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -r /var/lib/apt/lists/*
         
+
+# Donwload and install composer
+RUN curl -sSL "https://getcomposer.org/installer" | php \
+		&& mv composer.phar /usr/local/bin/composer
+
 
 WORKDIR /www
 RUN usermod -u 1000 www-data
