@@ -15,8 +15,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 RUN apt-get update --fix-missing \
     && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev  zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev\
     && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli mcrypt \
-    && pecl install xdebug-2.5.5  imagick-beta\
-    && docker-php-ext-enable xdebug imagick mcrypt \
+    && pecl install imagick-beta\
+    && docker-php-ext-enable imagick mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure opcache --enable-opcache \
     && rm -r /var/lib/apt/lists/*

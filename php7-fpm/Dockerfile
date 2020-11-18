@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 MAINTAINER holmesian "i@holmesian.org"
 
 #  设置时区
@@ -15,8 +15,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 RUN apt-get update  \
     && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev  zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev\
     && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli\
-    && pecl install xdebug-2.8.1 imagick-3.4.4 mcrypt-1.0.2 \
-    && docker-php-ext-enable xdebug imagick mcrypt \
+    && pecl install imagick-3.4.4 mcrypt-1.0.2 \
+    && docker-php-ext-enable imagick mcrypt \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure opcache --enable-opcache \
     && rm -r /var/lib/apt/lists/*

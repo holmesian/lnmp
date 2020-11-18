@@ -33,6 +33,23 @@ services:
         networks:
           - default
         
+    php5-fpm:
+        image: holmesian/php5-fpm
+        container_name: php5-fpm
+        env_file:
+          - .env
+        volumes:
+          - ${WWWROOT}:/www/:rw
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+        restart: always
+        environment:
+          TZ: "Asia/Shanghai"
+        cap_add:
+          - SYS_PTRACE
+        networks:
+          - default
+
 
     mysql:
         image: mysql:5
@@ -50,6 +67,30 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQLPASWD}
             TZ: "Asia/Shanghai"
+
+    # stock:
+    #     image: pythonstock/pythonstock:latest
+    #     container_name: stock
+    #     ports:
+    #         - "8888:8888"
+    #         - "9999:9999"
+    #     env_file:
+    #         - .env
+    #     volumes:
+    #         - ${STOCKROOT}/jobs:/data/stock/jobs
+    #         - ${STOCKROOT}/libs:/data/stock/libs
+    #         - ${STOCKROOT}/web:/data/stock/web
+    #         - ${STOCKROOT}/supervisor:/data/supervisor
+    #         - ${STOCKROOT}/notebooks:/data/notebooks
+    #     restart: always
+    #     networks:
+    #         - default
+    #     environment:
+    #         MYSQL_HOST: "mysql"
+    #         MYSQL_USER: "root"
+    #         MYSQL_PWD: ${MYSQLPASWD}
+    #         MYSQL_DB: "stock_data"
+            
 
 networks:
   default:
