@@ -8,8 +8,8 @@ services:
         ports:
           - "80:80"
         volumes:
-          - ${WWWROOT}:/www/:rw
-          - ./etc/nginx:/etc/nginx/
+          - ${WWWROOT}:/www/:${WWWROOTTYPE}
+          - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE}
         environment:
           TZ: "Asia/Shanghai"
         restart: always
@@ -22,9 +22,9 @@ services:
         env_file:
           - .env
         volumes:
-          - ${WWWROOT}:/www/:rw
-          - ./etc/php/php.ini:/usr/local/etc/php/php.ini
-          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+          - ${WWWROOT}:/www/:${WWWROOTTYPE}
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE}
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE}
         restart: always
         environment:
           TZ: "Asia/Shanghai"
@@ -39,9 +39,9 @@ services:
         env_file:
           - .env
         volumes:
-          - ${WWWROOT}:/www/:rw
-          - ./etc/php/php.ini:/usr/local/etc/php/php.ini
-          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf
+          - ${WWWROOT}:/www/:${WWWROOTTYPE}
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE}
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE}
         restart: always
         environment:
           TZ: "Asia/Shanghai"
@@ -59,8 +59,8 @@ services:
         env_file:
             - .env
         volumes:
-            - ${MYSQLDATA}:/var/lib/mysql:rw
-            - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf
+            - ${MYSQLDATA}:/var/lib/mysql:${MYSQLDATATYPE}
+            - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf:${WWWROOTTYPE}
         restart: always
         networks:
             - default
