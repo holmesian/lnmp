@@ -1,7 +1,7 @@
 version: "3"
 services:
     nginx:
-        image: nginx:1.15.7-alpine
+        image: nginx:1.19.6-alpine
         container_name: nginx
         env_file:
           - .env
@@ -9,6 +9,7 @@ services:
           - "80:80"
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
+          - ${LOGROOT:-/.}:/www/log:${MYSQLDATATYPE:-rw}
           - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE:-rw}
         environment:
           TZ: "Asia/Shanghai"

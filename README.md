@@ -1,6 +1,6 @@
 # lnmp
 
-nginx  php7-fpm/php5-fpm  mysql  的 docker 开发环境
+nginx  php7-fpm/php5-fpm  mysql  xdebug redis 的 docker 开发环境
 
 # 使用方法
 
@@ -14,14 +14,27 @@ nginx  php7-fpm/php5-fpm  mysql  的 docker 开发环境
 
 根据实际情况编辑 .env
 
-    #web文件路径
-    WWWROOT={/c/Users/holmesian/OneDrive/Coding/www}
+    # web文件路径
+    WWWROOT=/Users/holmesian/OneDrive/Coding/www
 
-    #mysql数据位置
-    MYSQLDATA={/c/Users/holmesian/OneDrive/AMD3600/Documents/docker/lnmp/mysql}
+    # log文件路径
+    LOGROOT=/Users/holmesian/Downloads/log
 
-    #mysql root密码
-    MYSQLPASWD={yourpasswd}
+    # WWWROOT读写模式
+    # WWWROOTTYPE=cached #For MAC
+    WWWROOTTYPE=rw  #For Win
+
+    # mysql数据位置
+    MYSQLDATA=/Users/holmesian/Docker/mysql
+
+    # MYSQLDATA读写模式
+    # MYSQLDATATYPE=delegated #For MAC
+    MYSQLDATATYPE=rw  #For Win
+
+    # mysql root密码
+    # MYSQLPASWD={yourpasswd}
+
+
 
 执行 docker-compose
 
