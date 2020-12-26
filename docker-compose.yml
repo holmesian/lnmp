@@ -8,8 +8,8 @@ services:
         ports:
           - "80:80"
         volumes:
-          - ${WWWROOT}:/www/:${WWWROOTTYPE}
-          - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE}
+          - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
+          - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE:-rw}
         environment:
           TZ: "Asia/Shanghai"
         restart: always
@@ -22,9 +22,9 @@ services:
         env_file:
           - .env
         volumes:
-          - ${WWWROOT}:/www/:${WWWROOTTYPE}
-          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE}
-          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE}
+          - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE:-rw}
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE:-rw}
         restart: always
         environment:
           TZ: "Asia/Shanghai"
@@ -40,8 +40,8 @@ services:
           - .env
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE}
-          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE}
-          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE}
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE:-rw}
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE:-rw}
         restart: always
         environment:
           TZ: "Asia/Shanghai"
@@ -59,13 +59,13 @@ services:
         env_file:
             - .env
         volumes:
-            - ${MYSQLDATA}:/var/lib/mysql:${MYSQLDATATYPE}
-            - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf:${WWWROOTTYPE}
+            - ${MYSQLDATA}:/var/lib/mysql:${MYSQLDATATYPE:-rw}
+            - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf:${WWWROOTTYPE:-rw}
         restart: always
         networks:
             - default
         environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQLPASWD}
+            MYSQL_ROOT_PASSWORD: ${MYSQLPASWD:-123456}
             TZ: "Asia/Shanghai"
 
     # stock:
