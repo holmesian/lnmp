@@ -68,6 +68,13 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQLPASWD:-123456}
             TZ: "Asia/Shanghai"
+ 
+    
+            
+    redis_db:
+        image: redis:6-alpine
+        networks:
+          - default
 
     # stock:
     #     image: pythonstock/pythonstock:latest
