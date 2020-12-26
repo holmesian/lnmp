@@ -18,7 +18,7 @@ services:
           - default
     
     php-fpm:
-        image: holmesian/php7-fpm
+        image: holmesian/php7-fpm:stable
         container_name: php-fpm
         env_file:
           - .env
