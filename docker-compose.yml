@@ -73,8 +73,12 @@ services:
             
     redis_db:
         image: redis:6-alpine
+        container_name: redis_db
+        restart: always
+        environment:
+            TZ: "Asia/Shanghai"
         networks:
-          - default
+            - default
 
     # stock:
     #     image: pythonstock/pythonstock:latest
