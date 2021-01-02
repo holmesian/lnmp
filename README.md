@@ -1,6 +1,6 @@
 # lnmp
 
-nginx  php7-fpm/php5-fpm  mysql  xdebug redis 的 docker 开发环境
+nginx  php7-fpm/php5-fpm  mysql  redis 的 docker 开发环境
 
 # 使用方法
 
@@ -48,7 +48,7 @@ nginx  php7-fpm/php5-fpm  mysql  xdebug redis 的 docker 开发环境
     
     - 将 etc\nginx 配置文件中，fastcgi_pass php-fpm:9000 修改为 fastcgi_pass php5-fpm:9000 即可使用 php5
     
-    - php / php5 目录下的 Dockerfile 为镜像配置文件，可酌情修改，自行编译新镜像。
+    - php / php5 目录下的 Dockerfile 为镜像配置文件，可酌情修改(可增加xdebug)，自行编译新镜像。
     
     - etc 目录中为相应的配置文件 
     
