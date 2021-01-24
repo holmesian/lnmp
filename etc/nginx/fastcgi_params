@@ -1,9 +1,7 @@
 try_files $uri = 404;
 fastcgi_hide_header X-Powered-By;
+
 add_header Cache-Control no-cache;
-
-
-
 
 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
