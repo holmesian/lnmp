@@ -9,7 +9,7 @@ services:
           - "80:80"
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
-          - ${LOGROOT:-/.}:/www/log:${MYSQLDATATYPE:-rw}
+          - ${LOGROOT:-/.}:/var/log/nginx/:${MYSQLDATATYPE:-rw}
           - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE:-rw}
         environment:
           TZ: "Asia/Shanghai"
@@ -55,14 +55,14 @@ services:
     mysql:
         image: mysql:5
         container_name: mysql
-        ports:
-            - "3306:3306"
         env_file:
             - .env
         volumes:
             - ${MYSQLDATA}:/var/lib/mysql:${MYSQLDATATYPE:-rw}
             - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf:${WWWROOTTYPE:-rw}
         restart: always
+        ports:
+            - "3306:3306"
         networks:
             - default
         environment:
