@@ -22,21 +22,23 @@ nginx  php7-fpm/php5-fpm  mysql  redis 的 docker 开发环境
 
     # WWWROOT读写模式
     # WWWROOTTYPE=cached #For MAC
-    WWWROOTTYPE=rw  #For Win
+    #For Win
+    WWWROOTTYPE=rw  
 
     # mysql数据位置
     MYSQLDATA=/Users/holmesian/Docker/mysql
 
     # MYSQLDATA读写模式
     # MYSQLDATATYPE=delegated #For MAC
-    MYSQLDATATYPE=rw  #For Win
+    #For Win
+    MYSQLDATATYPE=rw  
 
-    # mysql root密码
+    # mysql root密码  默认 123456
     # MYSQLPASWD={yourpasswd}
 
 
 
-执行 docker-compose
+执行 docker-compose  (docker-compose version >= 1.27)
 
     docker-compose up -d
     
@@ -44,7 +46,7 @@ nginx  php7-fpm/php5-fpm  mysql  redis 的 docker 开发环境
 
 # 备注
 
-    - 默认为 php7.4 
+    - 默认为 php7.4 ;    docker version >= 19
     
     - 将 etc\nginx 配置文件中，fastcgi_pass php-fpm:9000 修改为 fastcgi_pass php5-fpm:9000 即可使用 php5
     
