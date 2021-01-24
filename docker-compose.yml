@@ -5,8 +5,11 @@ services:
         container_name: nginx
         env_file:
           - .env
-        ports:
-          - "80:80"
+        ports: 
+          - mode: host 
+            protocol: tcp 
+            published: 80
+            target: 80
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
           - ${LOGROOT:-/.}:/var/log/nginx/:${MYSQLDATATYPE:-rw}
@@ -79,30 +82,6 @@ services:
             TZ: "Asia/Shanghai"
         networks:
             - default
-
-    # stock:
-    #     image: pythonstock/pythonstock:latest
-    #     container_name: stock
-    #     ports:
-    #         - "8888:8888"
-    #         - "9999:9999"
-    #     env_file:
-    #         - .env
-    #     volumes:
-    #         - ${STOCKROOT}/jobs:/data/stock/jobs
-    #         - ${STOCKROOT}/libs:/data/stock/libs
-    #         - ${STOCKROOT}/web:/data/stock/web
-    #         - ${STOCKROOT}/supervisor:/data/supervisor
-    #         - ${STOCKROOT}/notebooks:/data/notebooks
-    #     restart: always
-    #     networks:
-    #         - default
-    #     environment:
-    #         MYSQL_HOST: "mysql"
-    #         MYSQL_USER: "root"
-    #         MYSQL_PWD: ${MYSQLPASWD}
-    #         MYSQL_DB: "stock_data"
-            
 
 networks:
   default:
