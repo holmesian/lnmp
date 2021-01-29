@@ -8,7 +8,7 @@ services:
         ports: 
           - mode: host 
             protocol: tcp 
-            published: 80
+            published: ${NGINXPORT}
             target: 80
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
@@ -65,7 +65,7 @@ services:
             - ./etc/my.cnf:/etc/mysql/mysql.conf.d/my.cnf:${WWWROOTTYPE:-rw}
         restart: always
         ports:
-            - "3306:3306"
+            - "${MYSQLPORT}:3306"
         networks:
             - default
         environment:
