@@ -12,7 +12,7 @@ services:
             target: 80
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
-          - ${LOGROOT:-/.}:/var/log/nginx/:${MYSQLDATATYPE:-rw}
+          - ${LOGROOT:-/.}:/var/log/nginx/:${WWWROOTTYPE:-rw}
           - ./etc/nginx:/etc/nginx/:${WWWROOTTYPE:-rw}
         environment:
           TZ: "Asia/Shanghai"
@@ -27,6 +27,7 @@ services:
           - .env
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE:-rw}
+          - ${LOGROOT:-/.}:/var/log/php/:${WWWROOTTYPE:-rw}
           - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE:-rw}
           - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE:-rw}
         restart: always
@@ -44,6 +45,7 @@ services:
           - .env
         volumes:
           - ${WWWROOT}:/www/:${WWWROOTTYPE}
+          - ${LOGROOT:-/.}:/var/log/php/:${WWWROOTTYPE:-rw}
           - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE:-rw}
           - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE:-rw}
         restart: always
