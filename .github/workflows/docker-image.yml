@@ -25,7 +25,6 @@ jobs:
           docker push holmesian/php7-fpm:latest
       - name: build php5-fpm
         run: |
-          docker pull holmesian/php5-fpm:stable
-          docker build --cache-from=holmesian/php5-fpm:stable -t holmesian/php5-fpm:latest ./php5-fpm
+          docker build -t holmesian/php5-fpm:latest ./php5-fpm
           docker push holmesian/php5-fpm:latest
       
