@@ -2,6 +2,9 @@
 
 nginx  php7-fpm/php5-fpm  mysql  redis 的 docker 开发环境
 
+![Docker Image CI](https://github.com/holmesian/lnmp/workflows/Docker%20Image%20CI/badge.svg?branch=master)
+
+
 # 使用方法
 
 下载到本地
