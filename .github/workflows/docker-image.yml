@@ -1,0 +1,31 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v1
+      - name: Docker login
+        run: docker login -u holmesian -p ${{ secrets.DOCKER_HUB_PWD }}
+      
+      - name: build php7-fpm
+        run: |
+          docker pull holmesian/php7-fpm:stable
+          docker build --cache-from=holmesian/php7-fpm:stable -t holmesian/php7-fpm:latest ./php7-fpm
+          docker push holmesian/php7-fpm:latest
+      - name: build php5-fpm
+        run: |
+          docker pull holmesian/php5-fpm:stable
+          docker build --cache-from=holmesian/php5-fpm:stable -t holmesian/php5-fpm:latest ./php5-fpm
+          docker push holmesian/php5-fpm:latest
+      
