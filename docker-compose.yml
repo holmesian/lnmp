@@ -23,6 +23,7 @@ services:
     php-fpm:
         image: holmesian/php7-fpm:stable
         container_name: php-fpm
+        hostname: php-fpm
         env_file:
           - .env
         volumes:
@@ -41,6 +42,7 @@ services:
     php5-fpm:
         image: holmesian/php5-fpm
         container_name: php5-fpm
+        hostname: php5-fpm
         env_file:
           - .env
         volumes:
@@ -60,6 +62,7 @@ services:
     mysql:
         image: mysql:5
         container_name: mysql
+        hostname: mysql
         env_file:
             - .env
         volumes:
@@ -79,6 +82,7 @@ services:
     redis_db:
         image: redis:6-alpine
         container_name: redis_db
+        hostname: redis_db
         restart: always
         environment:
             TZ: "Asia/Shanghai"
@@ -87,3 +91,5 @@ services:
 
 networks:
   default:
+    driver:
+      bridge
