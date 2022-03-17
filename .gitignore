@@ -2,3 +2,4 @@
 *.bat
 mysql
 lnmp
+/etc/nginx/conf.d/*.conf
