@@ -53,9 +53,9 @@ nginx  php7-fpm/php5-fpm  mysql  redis 的 docker 开发环境
     
     - 将 etc\nginx 配置文件中，fastcgi_pass php-fpm:9000 修改为 fastcgi_pass php5-fpm:9000 即可使用 php5
     
-    - php / php5 目录下的 Dockerfile 为镜像配置文件，可酌情修改(可增加xdebug)，自行编译新镜像。
+    - php / php5 目录下的 Dockerfile 为镜像配置文件，可酌情修改重新编译。需调试的环境可以选择holmesian/php5-fpm:xdebug  holmesian/php7-fpm:xdebug 
     
-    - etc 目录中为相应的配置文件 
+    - etc 目录中为相应的配置文件 （nginx/mysql/php）
     
-    - docker container 中的网站目录为 /www 
+    - docker container 中的网站根目录为 /www 
 

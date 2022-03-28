@@ -7,8 +7,8 @@ LABEL maintainer="Holmesian <i@holmesian.org>"
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone 
 # 国内网络增加下列
-RUN sed -i "s@http://deb.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list \
-    && sed -i "s@http://security.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list
+# RUN sed -i "s@http://deb.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list \
+#     && sed -i "s@http://security.debian.org@https://mirrors.aliyun.com@g" /etc/apt/sources.list
 
 # WORKDIR /www
 #COPY . .
