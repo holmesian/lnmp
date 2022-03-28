@@ -1,7 +1,7 @@
 version: "3"
 services:
     nginx:
-        image: nginx:1.19.6-alpine
+        image: nginx:stable-alpine
         container_name: nginx
         env_file:
           - .env
@@ -21,7 +21,7 @@ services:
           - default
     
     php-fpm:
-        image: holmesian/php7-fpm:stable
+        image: holmesian/php7-fpm:latest
         container_name: php-fpm
         hostname: php-fpm
         env_file:
@@ -40,7 +40,7 @@ services:
           - default
         
     php5-fpm:
-        image: holmesian/php5-fpm
+        image: holmesian/php5-fpm:latest
         container_name: php5-fpm
         hostname: php5-fpm
         env_file:
