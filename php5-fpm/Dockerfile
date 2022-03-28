@@ -9,7 +9,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     # && sed -i "s@http://security.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list 
 
 # WORKDIR /www
-# 测试用
 #COPY . .
 #RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && mv sources.list /etc/apt/
 
