@@ -16,13 +16,16 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #  更新安装依赖包和PHP核心拓展 remove zlibc
 RUN apt-get update  \
-    && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev\
-    && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli\
-    && pecl install imagick mcrypt-1.0.3 redis-5.1.1 \
+    && apt-get install -y --no-install-recommends git libbz2-dev libmagickwand-dev libmcrypt-dev zlib1g-dev  libzip-dev libfreetype6-dev libjpeg62-turbo-dev libwebp-dev libjpeg-dev libpng-dev \
+    && cd /usr/local/bin/ \
+    && docker-php-source extract \
     && docker-php-ext-enable imagick mcrypt  redis \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
     && docker-php-ext-configure zip \
     && docker-php-ext-configure opcache --enable-opcache \
+    && docker-php-ext-install -j$(nproc) gd bcmath zip pdo_mysql opcache mysqli \
+    && docker-php-ext-enable gd \
+    && pecl install imagick mcrypt-1.0.3 redis-5.1.1 \
     && apt-get upgrade -y \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && rm -r /var/lib/apt/lists/*
