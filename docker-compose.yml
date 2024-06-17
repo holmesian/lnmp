@@ -57,7 +57,24 @@ services:
           - SYS_PTRACE
         networks:
           - default
-
+    php4-fpm:
+        image: centrinet/php4.4.9-fpm:latest
+        container_name: php4-fpm
+        hostname: php4-fpm
+        env_file:
+          - .env
+        volumes:
+          - ${WWWROOT}:/www/:${WWWROOTTYPE}
+          - ${LOGROOT:-/.}:/var/log/php/:${WWWROOTTYPE:-rw}
+          - ./etc/php/php.ini:/usr/local/etc/php/php.ini:${WWWROOTTYPE:-rw}
+          - ./etc/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:${WWWROOTTYPE:-rw}
+        restart: always
+        environment:
+          TZ: "Asia/Shanghai"
+        cap_add:
+          - SYS_PTRACE
+        networks:
+          - default
 
     mysql:
         image: mysql:5
