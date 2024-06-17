@@ -33,5 +33,11 @@ jobs:
           docker push holmesian/php5-fpm:latest
           docker build --cache-from=holmesian/php5-fpm:latest -t holmesian/php5-fpm:xdebug ./php5-fpm/ -f ./php5-fpm/Dockerfile-with-xdebug
           docker push holmesian/php5-fpm:xdebug
-          
+
+      - name: build php8-arm
+        run: |
+          docker pull holmesian/php8-fpm-arm:latest
+          docker build --cache-from=holmesian/php8-fpm-arm:latest -t holmesian/php8-fpm-arm:latest ./php8-arm
+          docker push holmesian/php8-fpm-arm:latest
+         
       
