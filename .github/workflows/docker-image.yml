@@ -17,15 +17,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Docker login
         run: docker login -u holmesian -p ${{ secrets.DOCKER_HUB_PWD }}
-      
-      - name: build php7-fpm
-        run: |
-          docker pull holmesian/php7-fpm:latest
-          docker build --cache-from=holmesian/php7-fpm:stable -t holmesian/php7-fpm:latest ./php7-fpm
-          docker push holmesian/php7-fpm:latest
-          docker build --cache-from=holmesian/php7-fpm:stable -t holmesian/php7-fpm:xdebug ./php7-fpm/ -f ./php7-fpm/Dockerfile-with-xdebug
-          docker push holmesian/php7-fpm:xdebug
-
+        
       - name: build php5-fpm
         run: |
           docker pull holmesian/php5-fpm:latest
@@ -33,6 +25,14 @@ jobs:
           docker push holmesian/php5-fpm:latest
           docker build --cache-from=holmesian/php5-fpm:latest -t holmesian/php5-fpm:xdebug ./php5-fpm/ -f ./php5-fpm/Dockerfile-with-xdebug
           docker push holmesian/php5-fpm:xdebug
+
+      - name: build php7-fpm
+        run: |
+          docker pull holmesian/php7-fpm:latest
+          docker build --cache-from=holmesian/php7-fpm:stable -t holmesian/php7-fpm:latest ./php7-fpm
+          docker push holmesian/php7-fpm:latest
+          docker build --cache-from=holmesian/php7-fpm:stable -t holmesian/php7-fpm:xdebug ./php7-fpm/ -f ./php7-fpm/Dockerfile-with-xdebug
+          docker push holmesian/php7-fpm:xdebug
 
       - name: build php8-arm
         run: |

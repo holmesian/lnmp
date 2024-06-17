@@ -8,6 +8,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # RUN sed -i "s@http://deb.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list \
     # && sed -i "s@http://security.debian.org@http://mirrors.aliyun.com@g" /etc/apt/sources.list 
 
+#从2023年4月23日起，debian9的源包地址更换至新地址
+RUN sed -i "s@http://deb.debian.org@http://archive.debian.org@g" /etc/apt/sources.list \
+&& sed -i "s@http://security.debian.org@http://archive.debian.org@g" /etc/apt/sources.list \
+&& sed -i "s@stretch-updates@stretch@g" /etc/apt/sources.list 
+
 # WORKDIR /www
 #COPY . .
 #RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && mv sources.list /etc/apt/
