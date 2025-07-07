@@ -18,13 +18,6 @@ jobs:
       - name: Docker login
         run: docker login -u holmesian -p ${{ secrets.DOCKER_HUB_PWD }}
         
-      - name: build php5-fpm
-        run: |
-          docker pull holmesian/php5-fpm:latest
-          docker build --cache-from=holmesian/php5-fpm:latest -t holmesian/php5-fpm:latest ./php5-fpm
-          docker push holmesian/php5-fpm:latest
-          docker build --cache-from=holmesian/php5-fpm:latest -t holmesian/php5-fpm:xdebug ./php5-fpm/ -f ./php5-fpm/Dockerfile-with-xdebug
-          docker push holmesian/php5-fpm:xdebug
 
       - name: build php7-fpm
         run: |
